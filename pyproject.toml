@@ -1,0 +1,118 @@
+[tool.poetry]
+name = "lynx2"
+version = "0.1.0"
+description = "Backend"
+authors = ["Lynx"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.23"}
+alembic = "^1.13.0"
+pydantic = {extras = ["email"], version = "^2.5.2"}
+python-jose = "^3.3.0"
+uvicorn = "^0.24.0.post1"
+psycopg2-binary = "^2.9.9"
+bcrypt = "^4.1.2"
+asyncpg = "^0.29.0"
+orjson = "^3.9.10"
+pytest-spec = "^3.2.0"
+structlog = "^24.1.0"
+uuid6 = "^2024.1.12"
+redis = "^5.0.4"
+celery = "^5.4.0"
+pydantic-settings = "^2.2.1"
+flower = "^2.0.1"
+
+
+[tool.poetry.group.tools.dependencies]
+pre-commit = "^3.5.0"
+
+
+[tool.poetry.group.lints.dependencies]
+mypy = "^1.7.1"
+ruff = "^0.1.7"
+black = "^23.11.0"
+isort = "^5.12.0"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.3"
+pytest-asyncio = "^0.23.3"
+httpx = "^0.26.0"
+pytest-factoryboy = "^2.6.0"
+pytest-sugar = "^0.9.7"
+pytest-cov = "^4.1.0"
+pytest-xdist = "^3.5.0"
+pytest-order = "^1.2.0"
+testcontainers = "^3.7.1"
+testcontainers-postgres = "^0.0.1rc1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+combine_as_imports = true
+remove_redundant_aliases = true
+force_grid_wrap = 2
+#
+#[tool.ruff]
+#fix = true
+#show-fixes = true
+#
+#[tool.ruff.lint]
+#fixable = ["Q000", "D102", "D202", "D415", "D102", "D415", "Q001", "D300", "F401"]
+#extend-select = [
+#    "A",    # flake8-builtins
+#    "B",   # flake8-bugbear
+#    "C4",    # flake8-comprehensions
+#    "E",   # pycodestyle
+#    "F",   # Pyflakes
+#    "UP",  # pyupgrade
+#    "Q",    # flake-quotes
+#    "N",    # pep8-naming
+#    "T20",    # flake8-print
+#    "I",    # isort
+#    "S",    # flake8-bandit
+#    "SIM",    # flake8-simplify
+#    "C90",    # {name} is too complex
+#    "RUF100",    # unused noqa
+#    "UP",  # pyupgrade
+#]
+#ignore = ["A001", "A003", "E711", "F841", "B008", "C901", "C408", "SIM102", "ANN401", "S104", "I001", "B904", "UP008", "S101", "S311", "A002", "E501"]
+#
+#[tool.mypy]
+#python_version = "3.11"
+#strict = false
+#pretty = true
+#ignore_missing_imports = true
+#disallow_any_explicit = false
+#disallow_any_generics = false
+#warn_unreachable = true
+#show_column_numbers = true
+#show_error_context = true
+#check_untyped_defs = true
+#show_absolute_path = true
+#show_error_codes = true
+#exclude = "(venv|migrations|tests)"
+#disable_error_code = "import-untyped"
