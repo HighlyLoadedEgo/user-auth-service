@@ -24,6 +24,8 @@ redis = "^5.0.4"
 celery = "^5.4.0"
 pydantic-settings = "^2.2.1"
 flower = "^2.0.1"
+fastapi-mail = "^1.4.1"
+petrovna = "^1.0.2"
 
 
 [tool.poetry.group.tools.dependencies]
@@ -75,44 +77,44 @@ profile = "black"
 combine_as_imports = true
 remove_redundant_aliases = true
 force_grid_wrap = 2
-#
-#[tool.ruff]
-#fix = true
-#show-fixes = true
-#
-#[tool.ruff.lint]
-#fixable = ["Q000", "D102", "D202", "D415", "D102", "D415", "Q001", "D300", "F401"]
-#extend-select = [
-#    "A",    # flake8-builtins
-#    "B",   # flake8-bugbear
-#    "C4",    # flake8-comprehensions
-#    "E",   # pycodestyle
-#    "F",   # Pyflakes
-#    "UP",  # pyupgrade
-#    "Q",    # flake-quotes
-#    "N",    # pep8-naming
-#    "T20",    # flake8-print
-#    "I",    # isort
-#    "S",    # flake8-bandit
-#    "SIM",    # flake8-simplify
-#    "C90",    # {name} is too complex
-#    "RUF100",    # unused noqa
-#    "UP",  # pyupgrade
-#]
-#ignore = ["A001", "A003", "E711", "F841", "B008", "C901", "C408", "SIM102", "ANN401", "S104", "I001", "B904", "UP008", "S101", "S311", "A002", "E501"]
-#
-#[tool.mypy]
-#python_version = "3.11"
-#strict = false
-#pretty = true
-#ignore_missing_imports = true
-#disallow_any_explicit = false
-#disallow_any_generics = false
-#warn_unreachable = true
-#show_column_numbers = true
-#show_error_context = true
-#check_untyped_defs = true
-#show_absolute_path = true
-#show_error_codes = true
-#exclude = "(venv|migrations|tests)"
-#disable_error_code = "import-untyped"
+
+[tool.ruff]
+fix = true
+show-fixes = true
+
+[tool.ruff.lint]
+fixable = ["Q000", "D102", "D202", "D415", "D102", "D415", "Q001", "D300", "F401"]
+extend-select = [
+    "A",    # flake8-builtins
+    "B",   # flake8-bugbear
+    "C4",    # flake8-comprehensions
+    "E",   # pycodestyle
+    "F",   # Pyflakes
+    "UP",  # pyupgrade
+    "Q",    # flake-quotes
+    "N",    # pep8-naming
+    "T20",    # flake8-print
+    "I",    # isort
+    "S",    # flake8-bandit
+    "SIM",    # flake8-simplify
+    "C90",    # {name} is too complex
+    "RUF100",    # unused noqa
+    "UP",  # pyupgrade
+]
+ignore = ["A001", "A003", "E711", "F841", "B008", "C901", "C408", "SIM102", "ANN401", "S104", "I001", "B904", "UP008", "S101", "S311", "A002", "E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+pretty = true
+ignore_missing_imports = true
+disallow_any_explicit = false
+disallow_any_generics = false
+warn_unreachable = true
+show_column_numbers = true
+show_error_context = true
+check_untyped_defs = true
+show_absolute_path = true
+show_error_codes = true
+exclude = "(venv|migrations|tests)"
+disable_error_code = "import-untyped"

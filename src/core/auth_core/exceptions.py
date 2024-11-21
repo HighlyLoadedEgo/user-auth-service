@@ -7,18 +7,18 @@ from src.core.common.exceptions import BaseAppError
 class TokenExpiredError(BaseAppError):
     @property
     def message(self) -> str:
-        return "Token has expired."
+        return "Token Expired: Token has expired."
 
 
 @dataclass(eq=True)
 class InvalidTokenError(BaseAppError):
     @property
     def message(self) -> str:
-        return "The token provided is invalid."
+        return "Invalid Token: The token provided is invalid."
 
 
 @dataclass(eq=True)
-class PermissionDeniedError(BaseAppError):
+class AuthorizationFailedError(BaseAppError):
     @property
     def message(self) -> str:
-        return "You do not have permission to perform this action."
+        return "Authorization Failed: Access denied."

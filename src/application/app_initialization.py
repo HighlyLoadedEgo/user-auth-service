@@ -18,14 +18,15 @@ from src.core.log.uvicorn_log.uvicorn_log_config_builder import build_uvicorn_lo
 logger = structlog.stdlib.get_logger(__name__)
 
 
-def init_app(app_settings: Settings, lifespan: Any | None = None) -> FastAPI:
+async def init_app(app_settings: Settings, lifespan: Any | None = None) -> FastAPI:
     """Initialize the FastAPI application with all dependencies."""
     app = FastAPI(
         **app_settings.APP,
         lifespan=lifespan,
     )
-    init_middlewares(app=app, settings=app_settings)
+    init_middlewares(app=app)
     setup_exception_handlers(app=app)
+    build_di(app=app, config=settings)
     init_routers(app=app)
 
     return app
@@ -47,7 +48,6 @@ async def run_api(app: FastAPI, app_settings: Settings) -> None:
 async def main() -> None:
     """Main entry point."""
     configure_logger(logger_config=settings.LOGGING)
-    app = init_app(app_settings=settings)
-    build_di(app=app, config=settings)
+    app = await init_app(app_settings=settings)
 
     await run_api(app_settings=settings, app=app)

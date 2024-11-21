@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import (
     ForeignKey,
+    Index,
     String,
 )
 from sqlalchemy.dialects.postgresql import UUID
@@ -39,3 +40,5 @@ class CompanyInformation(Base, UUIDMixin, DateMixin):
     )
 
     user: Mapped["User"] = relationship("User", back_populates="company_information")
+
+    __table_args__ = (Index(None, "user_id"),)

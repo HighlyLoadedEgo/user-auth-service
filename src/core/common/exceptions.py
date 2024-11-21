@@ -15,4 +15,13 @@ class BadRequestError(BaseAppError):
 
     @property
     def message(self) -> str:
-        return f"{self.info}"
+        return f"Bad Request: {self.info}"
+
+
+@dataclass(eq=True)
+class NotFoundError(BaseAppError):
+    info: str
+
+    @property
+    def message(self) -> str:
+        return f"Not Found: {self.info}"

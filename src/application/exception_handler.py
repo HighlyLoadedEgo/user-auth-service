@@ -14,18 +14,43 @@ from src.application.api.schemas.response_schemas.base_responses import (
     ErrorResponse,
 )
 from src.application.api.schemas.response_schemas.orjson import ORJSONResponseImpl
+from src.core.auth_core.exceptions import (
+    AuthorizationFailedError,
+    TokenExpiredError,
+)
 from src.core.common.exceptions import (
     BadRequestError,
     BaseAppError,
+    NotFoundError,
 )
-from src.modules.users.exceptions import UserIsAlreadyExistError
+from src.modules.users.exceptions import (
+    AuthenticationError,
+    EmailAlreadyInUseError,
+    PermissionDeniedError,
+)
 
 logger = structlog.stdlib.get_logger(__name__)
 
 
 def setup_exception_handlers(app: FastAPI) -> None:
     app.add_exception_handler(
-        UserIsAlreadyExistError, error_handler(status_code=status.HTTP_409_CONFLICT)
+        TokenExpiredError, error_handler(status_code=status.HTTP_401_UNAUTHORIZED)
+    )
+    app.add_exception_handler(
+        NotFoundError, error_handler(status_code=status.HTTP_404_NOT_FOUND)
+    )
+    app.add_exception_handler(
+        AuthorizationFailedError,
+        error_handler(status_code=status.HTTP_401_UNAUTHORIZED),
+    )
+    app.add_exception_handler(
+        PermissionDeniedError, error_handler(status_code=status.HTTP_403_FORBIDDEN)
+    )
+    app.add_exception_handler(
+        AuthenticationError, error_handler(status_code=status.HTTP_401_UNAUTHORIZED)
+    )
+    app.add_exception_handler(
+        EmailAlreadyInUseError, error_handler(status_code=status.HTTP_409_CONFLICT)
     )
     app.add_exception_handler(
         BadRequestError, error_handler(status_code=status.HTTP_400_BAD_REQUEST)

@@ -2,6 +2,8 @@ from celery import Celery
 
 from src.config.settings import settings
 
+from .tasks import mailing
+
 CELERY_BROKER_URL = settings.REDIS.redis_celery_url
 CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
@@ -26,3 +28,8 @@ celery_app.conf.update(
         "interval_max": 500,
     },
 )
+
+celery_app.task(mailing.send_admin_confirm_mail_task)
+celery_app.task(mailing.send_notify_new_admin_signup_mail_task)
+celery_app.task(mailing.send_user_confirm_mail_task)
+celery_app.task(mailing.send_notify_new_company_signup_mail_task)

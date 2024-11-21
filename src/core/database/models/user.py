@@ -7,6 +7,7 @@ from typing import (
 from sqlalchemy import (
     Boolean,
     ForeignKey,
+    Index,
     String,
 )
 from sqlalchemy.dialects.postgresql import UUID
@@ -62,3 +63,5 @@ class User(Base, UUIDMixin, DateMixin):
     company_information: Mapped[Optional["CompanyInformation"]] = relationship(
         "CompanyInformation", back_populates="user", uselist=False
     )
+
+    __table_args__ = (Index(None, "role_id"),)

@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from src.core.database.exceptions import DatabaseError
-from src.core.database.session_management import async_session_maker
+from src.core.database.session_factory import async_session_maker
 
 logger = structlog.stdlib.get_logger(__name__)
 
@@ -25,4 +25,5 @@ class DbProvider:
             async with session_maker.begin() as session:
                 yield session
         except SQLAlchemyError as error:
+            logger.error(error._message())
             raise DatabaseError(db_message=error._message())

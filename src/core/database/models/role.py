@@ -18,6 +18,8 @@ if TYPE_CHECKING:
 class Role(Base, UUIDMixin, DateMixin):
     __tablename__ = "role"
 
-    name: Mapped[str] = mapped_column(String, nullable=False, comment="Role name.")
+    name: Mapped[str] = mapped_column(
+        String, nullable=False, comment="Role name.", unique=True
+    )
 
     users: Mapped[list["User"]] = relationship("User", back_populates="role")

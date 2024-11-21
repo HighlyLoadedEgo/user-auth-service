@@ -19,13 +19,13 @@ class Response(BaseModel):
 
 
 class OkResponse(Response, Generic[TResult]):
-    result: TResult | None = None
-    message: str | None = None
+    result: TResult | None = Field(default=None)
+    message: str | None = Field(default=None)
 
 
 class ErrorData(Response, Generic[TError]):
     message: str = "Error message"
-    data: TError | None = None
+    data: TError | None = Field(default=None)
 
 
 class ErrorResponse(Response, Generic[TError]):
